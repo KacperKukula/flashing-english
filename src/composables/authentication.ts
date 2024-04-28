@@ -1,27 +1,47 @@
-const LOGIN = 'KACPER';
-const PASSWORD = '1234';
-
+import { Router } from 'vue-router';
 import { Login } from "@/interfaces/Login";
-import { useRouter } from "vue-router";
+import sessionManager from "./session/sessionManager";
+import { EnumSession } from "./session/model/EnumSession";
+import { fireBaseService } from "@/api/fireBaseService";
 
 const USER_LOGIN = 'KACPER';
 const USER_PASSWORD = '1234';
 
-const router = useRouter();
+/* eslint-disable */
 
-export function loginAction(loginData: Login) {
+export function logInByEmail(loginData: Login, router: Router) {
 
-    if (loginData.login === USER_LOGIN && loginData.password === USER_PASSWORD) {
-        console.log(router);
-        router.push('/home');
-        return true;
-    } else {
-        return false;
-    }
+    fireBaseService.logInByEmail(loginData);
+
+    //if (loginData.login === USER_LOGIN && loginData.password === USER_PASSWORD) {
+    // if (true) {
+    //     setLogged(true);
+    //     router.push('/dashboard');
+
+    //     return true;
+    // } else {
+    //     return false;
+    // }
 }
 
-export function checkIsLogged() {
+export function checkIsLogged(router: Router) {
+
     localStorage.getItem('isLogged') === 'true' ?
         router.push('/home') :
         router.push('/login');
+}
+
+export function logout(router: Router) {
+
+    sessionManager.clear();
+    router.push('/login');
+}
+
+/**
+ * Sets the logged-in status in the session.
+ *
+ * @param {boolean} isLogged - The logged-in status to set. Defaults to `false`.
+ */
+function setLogged(isLogged: boolean = false) {
+    sessionManager.set(EnumSession.LOGGED, isLogged);
 }

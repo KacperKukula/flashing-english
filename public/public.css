@@ -10,6 +10,11 @@ body {
     font-size: 16px;
 }
 
+#app {
+    text-align: center;
+    padding-top: 40px;
+}
+
 a {
     text-decoration: none;
 }

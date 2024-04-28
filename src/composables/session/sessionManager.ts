@@ -1,5 +1,7 @@
+import { EnumSession } from './model/EnumSession';
+
 class SessionManager {
-  set(key: string, value: string): void {
+  set(key: EnumSession, value: any): void {
     localStorage.setItem(key, value);
   }
 

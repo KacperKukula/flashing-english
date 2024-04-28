@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <q-form class="login_form" @submit="loginAction(data)">
+        <q-form class="login_form" @submit="logInByEmail(data, router)">
             <q-input type="text" class="primary" v-model="data.login" filled label="Login" label-color="primary" color="accent" text-color="red"
                 :rules="rules" lazy-rules :input-style="{ color: 'white' }"/>
             <q-input type="password" class="primary" v-model="data.password" filled label="Password" label-color="primary" color="accent" text-color="red"
@@ -8,22 +8,24 @@
     
             <q-btn label="Submit" type="submit" color="accent"/>
         </q-form>
+
+        <router-link to="/signup">Register</router-link>
     </div>
 </template>
 
 <script>
 import { ref } from 'vue';
-import { loginAction } from '@/composables/authentication';
+import { logInByEmail } from '@/composables/authentication';
+import { useRouter } from "vue-router";
 
 export default {
     name: 'LoginView',
-    setup() {
-
+    setup() {        
+        const router = useRouter();
         const data = ref({
             login: '',
             password: ''
         });
-
         const rules = ref([
             val => val !== null && val !== '' || 'Required.'
         ]);
@@ -35,7 +37,8 @@ export default {
         return {
             data,
             rules,
-            loginAction
+            router,
+            logInByEmail
         }
     }
 }
@@ -47,7 +50,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    min-height: 100dvh;
+    min-height: 90dvh;
 
     &_form {
         display: flex;

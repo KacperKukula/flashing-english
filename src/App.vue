@@ -1,6 +1,10 @@
 <template>
   <navbar-component class="navbar" />
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
 <script>
@@ -13,10 +17,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
-#app {
-  text-align: center;
-}
+<style lang="scss" scoped>
 .navbar {
   position: fixed;
   width: 100%;

@@ -19,14 +19,14 @@ module.exports = defineConfig({
       },
     },
     devServer: {
-      allowedHosts: "all",
-      proxy: {
-        "/ws": {
-          target: "https://n88zxx-8080.csb.app",
-          ws: true,
-          secure: true,
-        },
-      },
+      // allowedHosts: "all",
+      // proxy: {
+      //   "/ws": {
+      //     target: "https://n88zxx-8080.csb.app",
+      //     ws: true,
+      //     secure: true,
+      //   },
+      // },
     },
   },
 
